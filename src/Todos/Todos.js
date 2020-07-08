@@ -1,8 +1,9 @@
 import React from "react";
+import s from "./Todos.module.css";
 
-const Todos = ({ todos, deleteTodo }) => {
-  const todoList = todos.length ? (
-    todos.map((todo) => {
+const Todos = ({ showedTodos, deleteTodo }) => {
+  const todoList = showedTodos.length ? (
+    showedTodos.map((todo) => {
       return (
         <div className="collection-item" key={todo.id}>
           <span
@@ -11,6 +12,8 @@ const Todos = ({ todos, deleteTodo }) => {
             }}
           >
             {todo.content}
+
+            <div className={s.complete + " right"}></div>
           </span>
         </div>
       );
