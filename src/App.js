@@ -9,6 +9,28 @@ class App extends Component {
     showedTodos: [],
     allTodos: [],
   };
+
+  completedToggle = (id) => {
+    const allTodos = this.state.allTodos.map((todo) => {
+      if (todo.id === id) {
+        todo.completed = todo.completed ? false : true;
+        return todo;
+      }
+      return todo;
+    });
+    const showedTodos = this.state.showedTodos.map((todo) => {
+      if (todo.id === id) {
+        todo.completed = todo.completed ? false : true;
+        return todo;
+      }
+      return todo;
+    });
+    this.setState({
+      allTodos: allTodos,
+      showedTodos: showedTodos,
+    });
+  };
+
   deleteTodo = (id) => {
     const allTodos = this.state.allTodos.filter((todo) => todo.id !== id);
     const showedTodos = this.state.showedTodos.filter((todo) => todo.id !== id);
@@ -17,8 +39,10 @@ class App extends Component {
       showedTodos: showedTodos,
     });
   };
+
   addTodo = (todo) => {
     todo.id = Math.random();
+    todo.completed = false;
     const allTodos = [...this.state.allTodos, todo];
     const showedTodos = [...this.state.showedTodos, todo];
     this.setState({
@@ -26,6 +50,7 @@ class App extends Component {
       showedTodos: showedTodos,
     });
   };
+
   searchTodo = (value) => {
     let allTodos = [...this.state.allTodos];
     this.setState({
@@ -42,6 +67,7 @@ class App extends Component {
         <Todos
           deleteTodo={this.deleteTodo}
           showedTodos={this.state.showedTodos}
+          completedToggle={this.completedToggle}
         />
         <Buttons />
         <SearchTodo searchTodo={this.searchTodo} />
