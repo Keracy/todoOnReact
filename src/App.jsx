@@ -7,11 +7,22 @@ import Header from "./components/Header/Header";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+  let filteredTodos = [...todos];
   const [active, setActive] = useState(true);
   const [completed, setCompleted] = useState(false);
   const [searchWord, setSearchWord] = useState("");
-  const showAll = () => {};
-
+  const showAll = () => {
+    setActive(false);
+    setCompleted(false);
+  };
+  const showCompleted = () => {
+    setActive(false);
+    setCompleted(true);
+  };
+  const showActive = () => {
+    setActive(true);
+    setCompleted(false);
+  };
   const deleteTodo = (id) => {
     const allTodos = todos.filter((todo) => todo.id !== id);
     console.log(allTodos);
@@ -42,9 +53,13 @@ const App = () => {
     setSearchWord(value);
   };
 
-  const filteredTodos = todos.filter(({ content }) =>
-    content.toLowerCase().includes(searchWord.toLowerCase())
-  );
+  filteredTodos = todos
+    .filter((todo) =>
+      active ? !todo.completed : completed ? todo.completed : true
+    )
+    .filter(({ content }) =>
+      content.toLowerCase().includes(searchWord.toLowerCase())
+    );
   return (
     <div className="todo-app container">
       <Header />
@@ -54,7 +69,11 @@ const App = () => {
         filteredTodos={filteredTodos}
         deleteTodo={deleteTodo}
       />
-      <Buttons />
+      <Buttons
+        showAll={showAll}
+        showActive={showActive}
+        showCompleted={showCompleted}
+      />
       <SearchTodo searchTodo={searchTodo} />
     </div>
   );

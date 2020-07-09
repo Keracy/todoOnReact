@@ -3,7 +3,10 @@ import s from "./Button.module.css";
 
 const Button = (props) => {
   return (
-    <button className={s.button + " waves-effect waves-light btn"}>
+    <button
+      onClick={props.clickHandler}
+      className={s.button + " waves-effect waves-light btn"}
+    >
       {props.content}
     </button>
   );
