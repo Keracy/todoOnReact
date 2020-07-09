@@ -1,6 +1,10 @@
-.complete {
+.complete_check {
   width: 20px;
   height: 20px;
   border-radius: 20px;
   border: 1px solid grey;
+}
+.completed {
+  background-color: limegreen;
+  border: 0px;
 }
