@@ -1,26 +1,24 @@
 import React from "react";
 import s from "./Todo.module.css";
 
-const Todo = (props) => {
+const Todo = ({ completedToggle, deleteTodo, todo }) => {
   return (
     <div className="collection-item">
       <span>
         <span
           onClick={() => {
-            props.deleteTodo(props.todo.id);
+            deleteTodo(todo.id);
           }}
         >
-          {props.todo.content}
+          {todo.content}
         </span>
         <div
           onClick={(event) => {
             event.target.classList.toggle(s.completed);
-            props.completedToggle(props.todo.id);
+            completedToggle(todo.id);
           }}
           className={
-            s.complete_check +
-            " right " +
-            (props.todo.completed ? "completed" : " ")
+            s.complete_check + " right " + (todo.completed ? s.completed : " ")
           }
         ></div>
       </span>

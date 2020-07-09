@@ -8,7 +8,7 @@ import Header from "./components/Header/Header";
 const App = () => {
   const [todos, setTodos] = useState([]);
   let filteredTodos = [...todos];
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [searchWord, setSearchWord] = useState("");
   const showAll = () => {
@@ -33,7 +33,6 @@ const App = () => {
     const allTodos = todos.map((todo) => {
       if (todo.id === id) {
         todo.completed = todo.completed ? false : true;
-        console.log(todo.completed);
         return todo;
       }
       return todo;
